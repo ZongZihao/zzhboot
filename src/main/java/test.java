@@ -1,4 +1,16 @@
+import proxy.SayHello;
+import proxy.SayHelloImpl;
+import proxy.SayHelloProxy;
+import sun.net.www.http.HttpClient;
+
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.CyclicBarrier;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName : test
@@ -9,10 +21,16 @@ import java.math.BigDecimal;
 
 public class test {
 
-    public static void main(String[] args){
-        System.out.println("this is branch b");
-        System.out.println("this is branch 1");
+    public static void main(String[] args) {
 
+        int num = 1;
+
+        new ArrayList<Integer>() {{
+            add(1);
+        }}.forEach(x -> {
+            System.out.println(num);
+        });
     }
 
 }
+

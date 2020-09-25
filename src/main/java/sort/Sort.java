@@ -1,7 +1,10 @@
 package sort;
 
-import java.util.Arrays;
-import java.util.List;
+import com.sun.javafx.collections.SortableList;
+
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -14,12 +17,34 @@ import java.util.stream.Stream;
 public class Sort {
 
     public static void main(String[] args){
-        String a = "";
 
-        String[] b = a.split(",");
+        Sortable sortable = new SelectSort();
 
-        Arrays.stream(b).forEach(x -> System.out.println(x));
+        Long time = sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), 1000, true);
 
+        System.out.println(time);
+    }
+
+    public static List<Integer> createList(int num){
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < num; i++){
+            Random random = new Random();
+            list.add(random.nextInt(num));
+        }
+        return list;
+    }
+
+    public static Long sortTimeCalculate(Consumer<List<Integer>> consumer, int num, boolean isPrint){
+        Long t1 = System.currentTimeMillis();
+        List<Integer> list = createList(num);
+        consumer.accept(list);
+        Long t2 = System.currentTimeMillis();
+
+        if(isPrint){
+            System.out.println(list);
+        }
+
+        return t2 - t1;
     }
 
 }
