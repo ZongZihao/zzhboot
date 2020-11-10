@@ -1,4 +1,6 @@
-package proxy;
+package com.zzh.proxy;
+
+import com.zzh.proxy.SayHello;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

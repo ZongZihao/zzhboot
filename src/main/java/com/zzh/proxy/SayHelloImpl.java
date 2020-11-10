@@ -1,4 +1,4 @@
-package proxy;
+package com.zzh.proxy;
 
 /**
  * @ClassName : SayHelloImpl
@@ -7,7 +7,7 @@ package proxy;
  * @Date: 2020-08-26 12:17
  */
 
-public class SayHelloImpl implements SayHello{
+public class SayHelloImpl implements SayHello {
     @Override
     public void sayHello(String name, Integer year) {
         String str = String.format("Hello, name: %s, age: %d", name, year);

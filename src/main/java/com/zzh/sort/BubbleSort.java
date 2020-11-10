@@ -1,4 +1,4 @@
-package sort;
+package com.zzh.sort;
 
 import java.util.Comparator;
 import java.util.List;

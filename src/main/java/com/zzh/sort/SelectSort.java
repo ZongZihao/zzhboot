@@ -1,4 +1,4 @@
-package sort;
+package com.zzh.sort;
 
 import java.util.*;
 
@@ -9,7 +9,7 @@ import java.util.*;
  * @Date: 2020-06-29 09:24
  */
 
-public class SelectSort implements Sortable{
+public class SelectSort implements Sortable {
 
     public String name = "选择排序";
 
