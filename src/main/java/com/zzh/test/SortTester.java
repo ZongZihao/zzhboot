@@ -1,9 +1,12 @@
 package com.zzh.test;
 
 
+import com.zzh.container.Autowired;
+import com.zzh.container.Component;
 import com.zzh.sort.SelectSort;
 import com.zzh.sort.Sortable;
 
+import java.nio.channels.Selector;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -16,12 +19,14 @@ import java.util.function.Consumer;
  * @Author : 宗子豪
  * @Date: 2020-09-25 15:45
  */
-
+@Component
 public class SortTester {
 
-    public void sort(){
-        Sortable sortable = new SelectSort();
+    @Autowired
+    private SelectSort sortable;
 
+    public void sort(){
+//        Sortable sortable = new SelectSort();
         Long time = sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), 1000, true);
 
         System.out.println(time);

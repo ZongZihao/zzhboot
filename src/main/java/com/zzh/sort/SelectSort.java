@@ -1,5 +1,7 @@
 package com.zzh.sort;
 
+import com.zzh.container.Component;
+
 import java.util.*;
 
 /**
@@ -8,7 +10,7 @@ import java.util.*;
  * @Author : 宗子豪
  * @Date: 2020-06-29 09:24
  */
-
+@Component
 public class SelectSort implements Sortable {
 
     public String name = "选择排序";

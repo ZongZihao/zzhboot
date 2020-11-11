@@ -1,9 +1,13 @@
 package com.zzh;
 
 import com.sun.jndi.toolkit.url.UrlUtil;
+import com.zzh.container.Autowired;
+import com.zzh.container.Component;
+import com.zzh.container.MyContainer;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.time.temporal.IsoFields;
 import java.util.ArrayList;
@@ -39,8 +43,26 @@ public class ZzhApplication {
         //得到所有类文件
         List<Class<?>> classList = getClassByName(classNames);
 
-        for (Class<?> clazz : classList) {
+        //去掉
+        classList.removeIf(x -> x.getAnnotation(Component.class) == null);
 
+        for (Class<?> clazz : classList) {
+            Component component = clazz.getAnnotation(Component.class);
+            if(component != null){
+                //将类加入容器
+                MyContainer.addBean(clazz.getName(), clazz.newInstance());
+            }
+        }
+
+        for (Class<?> clazz : classList) {
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field field : fields) {
+                if(field.getAnnotation(Autowired.class) != null){
+                    field.setAccessible(true);
+                    Object obj = MyContainer.getBean(clazz);
+                    field.set(obj, MyContainer.getBean(field));
+                }
+            }
         }
 
     }
