@@ -17,6 +17,28 @@ public interface Sortable {
      * @param list 传入列表
      * @param comparator 比较器
      */
-    <T> void sort(List<T> list, Comparator<T> comparator);
+    <T> void sort(T[] list, Comparator<T> comparator);
+
+    /**
+     * 获取排序方式名称
+     * @return
+     */
+    String getSorterName();
+
+    /**
+     * 调换数组中两个元素的位置
+     * @param a
+     * @param o1
+     * @param o2
+     * @param <T>
+     */
+    default <T> void swap(T[] a, int o1, int o2){
+
+        T tmp = a[o1];
+
+        a[o1] = a[o2];
+
+        a[o2] = tmp;
+    }
 
 }
