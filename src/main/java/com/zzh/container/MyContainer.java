@@ -25,15 +25,15 @@ public class MyContainer {
     }
 
     public static Object getBean(Field field){
-        String className = field.getType().getName();
+        Class clazz = field.getType();
         //todo 暂时不考虑接口
-        return contextBeanMap.get(className);
+        return getBean(clazz);
     }
 
     public static Object getBean(Class clazz){
-        String className = clazz.getName();
+        String key = clazz.getPackage().getName().concat(".").concat(clazz.getName());
         //todo 暂时不考虑接口
-        return contextBeanMap.get(className);
+        return contextBeanMap.get(key);
     }
 
 }

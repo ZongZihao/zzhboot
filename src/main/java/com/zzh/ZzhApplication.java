@@ -50,7 +50,9 @@ public class ZzhApplication {
             Component component = clazz.getAnnotation(Component.class);
             if(component != null){
                 //将类加入容器
-                MyContainer.addBean(clazz.getName(), clazz.newInstance());
+                String clazzPackage = clazz.getPackage().getName();
+                String finalName = clazzPackage.concat(".").concat(clazz.getName());
+                MyContainer.addBean(finalName, clazz.newInstance());
             }
         }
 
@@ -60,7 +62,7 @@ public class ZzhApplication {
                 if(field.getAnnotation(Autowired.class) != null){
                     field.setAccessible(true);
                     Object obj = MyContainer.getBean(clazz);
-                    field.set(obj, MyContainer.getBean(field));
+                    field.set(obj, MyContainer.getBean(field.getType()));
                 }
             }
         }

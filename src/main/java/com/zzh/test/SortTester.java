@@ -28,9 +28,9 @@ public class SortTester {
 
     public void sort(){
 //        Sortable sortable = new SelectSort();
-        sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), 20000, false);
+        sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), 2000, false);
 
-        sortTimeCalculate(x -> Collections.sort(Arrays.asList(x)), 20000, false);
+        sortTimeCalculate(x -> Collections.sort(Arrays.asList(x)), 2000, false);
 
     }
 
