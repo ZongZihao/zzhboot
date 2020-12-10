@@ -1,16 +1,12 @@
 package com.zzh.test;
 
 
-import com.zzh.container.Autowired;
-import com.zzh.container.Component;
-import com.zzh.sort.BubbleSort;
-import com.zzh.sort.SelectSort;
-import com.zzh.sort.Sortable;
+import com.zzh.annotation.Autowired;
+import com.zzh.annotation.Component;
+import com.test.sort.BubbleSort;
 
-import java.nio.channels.Selector;
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

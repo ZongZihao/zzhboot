@@ -1,9 +1,8 @@
-package com.zzh.sort;
+package com.test.sort;
 
-import com.zzh.container.Component;
+import com.zzh.annotation.Component;
 
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * @ClassName : BubbleSort

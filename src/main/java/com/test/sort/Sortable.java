@@ -1,7 +1,6 @@
-package com.zzh.sort;
+package com.test.sort;
 
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * @ClassName : Sortable
