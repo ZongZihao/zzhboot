@@ -1,9 +1,8 @@
-package com.zzh.test;
+package com.test.sort;
 
 
 import com.zzh.annotation.Autowired;
 import com.zzh.annotation.Component;
-import com.test.sort.BubbleSort;
 
 import java.util.*;
 import java.util.function.Consumer;
