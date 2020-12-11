@@ -22,10 +22,15 @@ public class SortTester {
     private BubbleSort sortable;
 
     public void sort(){
-//        Sortable sortable = new SelectSort();
-        sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), 2000, false);
 
-        sortTimeCalculate(x -> Collections.sort(Arrays.asList(x)), 2000, false);
+        int num = 10000;
+
+//        Sortable sortable = new SelectSort();
+        System.out.print(sortable.getSorterName() + ": ");
+        sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), num, false);
+
+        System.out.print("系统排序: ");
+        sortTimeCalculate(Arrays::sort, num, false);
 
     }
 

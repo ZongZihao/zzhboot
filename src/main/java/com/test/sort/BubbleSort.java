@@ -13,7 +13,7 @@ import java.util.Comparator;
 @Component
 public class BubbleSort implements Sortable {
 
-    public String name = "冒泡排序";
+    private String name = "冒泡排序";
 
     @Override
     public <T> void sort(T[] list, Comparator<T> comparator) {

@@ -1,8 +1,9 @@
 package com.test;
 
 import com.test.sort.SortTester;
-import com.zzh.ZzhApplication;
-import com.zzh.container.MyContainer;
+import com.zzh.core.ZzhApplication;
+import com.zzh.core.ioc.BeanFactory;
+
 /**
  * @ClassName : test
  * @Description :
@@ -16,7 +17,7 @@ public class Test {
 
         ZzhApplication.run(Test.class);
 
-        SortTester tester = (SortTester) MyContainer.getBean(SortTester.class);
+        SortTester tester = (SortTester) BeanFactory.getBean(SortTester.class);
 
         tester.sort();
     }
