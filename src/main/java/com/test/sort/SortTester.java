@@ -19,15 +19,16 @@ import java.util.stream.Stream;
 public class SortTester {
 
     @Autowired
-    private Sortable sortable;
+    private List<Sortable> sortableList;
 
     public void sort(){
 
-        int num = 10000;
+        int num = 20000;
 
-//        Sortable sortable = new SelectSort();
-        System.out.print(sortable.getSorterName() + ": ");
-        sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), num, false);
+        for (Sortable sortable : sortableList) {
+            System.out.print(sortable.getSorterName() + ": ");
+            sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), num, false);
+        }
 
         System.out.print("系统排序: ");
         sortTimeCalculate(Arrays::sort, num, false);

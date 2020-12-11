@@ -5,6 +5,8 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Set;
 
 /**
@@ -66,6 +68,24 @@ public class ReflectionUtil {
         } catch (IllegalAccessException e) {
             throw new AssertionError(e);
         }
+    }
+
+    /**
+     * 获取属性的泛型类
+     * @param field
+     * @return
+     */
+    public static Class<?> getGenericType(Field field){
+        field.setAccessible(true);
+        Type genericType = field.getGenericType();
+
+        if(genericType instanceof ParameterizedType){
+            ParameterizedType pt = (ParameterizedType) genericType;
+            return (Class<?>) pt.getActualTypeArguments()[0];
+        }
+
+        return null;
+
     }
 
 }

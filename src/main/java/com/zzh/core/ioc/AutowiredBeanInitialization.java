@@ -1,5 +1,6 @@
 package com.zzh.core.ioc;
 
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import com.zzh.annotation.Autowired;
 import com.zzh.annotation.Component;
 import com.zzh.common.utils.ReflectionUtil;
@@ -7,6 +8,10 @@ import com.zzh.exception.InterfaceNotHaveImplementedClassException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,8 +40,13 @@ public class AutowiredBeanInitialization {
 
         for (Field field : fields) {
             if(field.isAnnotationPresent(Autowired.class)){
-                Object fieldValue = processAutowiredAnnotationField(field);
-                ReflectionUtil.setFieldValue(beanInstance, field, fieldValue);
+                if(field.getType() != List.class) {
+                    Object fieldValue = processAutowiredAnnotationField(field);
+                    ReflectionUtil.setFieldValue(beanInstance, field, fieldValue);
+                }else{
+                    List<Object> fieldValue = processAutowiredAnnotationListField(field);
+                    ReflectionUtil.setFieldValue(beanInstance, field, fieldValue);
+                }
             }
         }
 
@@ -47,7 +57,7 @@ public class AutowiredBeanInitialization {
      * @param beanField
      * @return
      */
-    public Object processAutowiredAnnotationField(Field beanField){
+    private Object processAutowiredAnnotationField(Field beanField){
         Class<?> beanFieldClass = beanField.getType();
         String fullName = BeanFactory.getFullQualifierName(beanFieldClass);
         Object instance;
@@ -72,6 +82,32 @@ public class AutowiredBeanInitialization {
             //todo throw exception
         }
         return instance;
+    }
+
+    private List<Object> processAutowiredAnnotationListField(Field listBeanField){
+        List<Object> objList = new ArrayList<>();
+        Class<?> genericClass = ReflectionUtil.getGenericType(listBeanField);
+
+        if(genericClass.isInterface()){
+            @SuppressWarnings("unchecked")
+            Set<Class<?>> subClasses = ReflectionUtil.getSubClass(packageNames, (Class<Object>) genericClass);
+            //去掉所有不带注解的
+            subClasses.removeIf(x -> !x.isAnnotationPresent(Component.class));
+            if(subClasses.size() == 0){
+                throw new InterfaceNotHaveImplementedClassException(listBeanField.getName() + "is interface and do not have implemented class exception");
+            }else{
+                Iterator<Class<?>> iterator = subClasses.iterator();
+                while(iterator.hasNext()){
+                    Class<?> clazz = iterator.next();
+                    String fullName = BeanFactory.getFullQualifierName(clazz);
+                    objList.add(BeanFactory.getBean(fullName));
+                }
+            }
+        }else{
+            objList.add(BeanFactory.getBean(BeanFactory.getFullQualifierName(genericClass)));
+        }
+        return objList;
+
 
     }
 

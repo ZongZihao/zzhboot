@@ -10,7 +10,7 @@ import java.util.Comparator;
  * @Author : 宗子豪
  * @Date: 2020-09-24 12:13
  */
-//@Component
+@Component
 public class BubbleSort implements Sortable {
 
     private String name = "冒泡排序";
