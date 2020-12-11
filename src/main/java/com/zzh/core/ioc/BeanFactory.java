@@ -31,13 +31,16 @@ public class BeanFactory {
     }
 
     public static Object getBean(Field field){
-        Class clazz = field.getType();
+        Class<?> clazz = field.getType();
         return getBean(clazz);
     }
 
-    public static Object getBean(Class clazz){
+    public static Object getBean(String fullName){
+        return CONTEXT_BEAN.get(fullName);
+    }
+
+    public static Object getBean(Class<?> clazz){
         String beanFullName = getFullQualifierName(clazz);
-        //todo 暂时不考虑接口
         return CONTEXT_BEAN.get(beanFullName);
     }
 

@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 public class SortTester {
 
     @Autowired
-    private BubbleSort sortable;
+    private Sortable sortable;
 
     public void sort(){
 
