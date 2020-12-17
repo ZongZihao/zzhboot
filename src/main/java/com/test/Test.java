@@ -4,6 +4,9 @@ import com.test.sort.SortTester;
 import com.zzh.core.ZzhApplication;
 import com.zzh.core.ioc.BeanFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @ClassName : test
  * @Description :
@@ -11,7 +14,7 @@ import com.zzh.core.ioc.BeanFactory;
  * @Date: 2020-07-15 17:27
  */
 
-public class Test {
+ public class Test {
 
     public static void main(String[] args) throws Exception {
 

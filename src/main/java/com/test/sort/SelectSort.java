@@ -10,7 +10,7 @@ import java.util.*;
  * @Author : 宗子豪
  * @Date: 2020-06-29 09:24
  */
-@Component
+//@Component
 public class SelectSort implements Sortable {
 
     @Override
@@ -24,7 +24,7 @@ public class SelectSort implements Sortable {
             T min = list[i];
             int minIndex = i;
             for(int j = i + 1; j < list.length; j++){
-                T current = (T) list[j];
+                T current = list[j];
                 //如果当前比最小的小, 则记录
                 if(comparator.compare(current, min) < 0){
                     min = current;

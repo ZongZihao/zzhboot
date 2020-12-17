@@ -23,15 +23,19 @@ public class SortTester {
 
     public void sort(){
 
-        int num = 20000;
+        int num = 10000000;
 
         for (Sortable sortable : sortableList) {
             System.out.print(sortable.getSorterName() + ": ");
-            sortTimeCalculate(x -> sortable.sort(x, Comparator.comparingInt(y -> y)), num, false);
+            sortTimeCalculate(sortable, Comparator.comparingInt(y -> y), num, false, true);
         }
 
         System.out.print("系统排序: ");
-        sortTimeCalculate(Arrays::sort, num, false);
+        Integer[] tmpList = createList(num);
+        Long t1 = System.currentTimeMillis();
+        Arrays.sort(tmpList);
+        Long t2 = System.currentTimeMillis();
+        System.out.println((t2 - t1) / 1000 + "." + (t2 - t1) % 1000 + "s");
 
     }
 
@@ -44,10 +48,11 @@ public class SortTester {
         return list;
     }
 
-    private Long sortTimeCalculate(Consumer<Integer[]> consumer, int num, boolean isPrint){
-        Long t1 = System.currentTimeMillis();
+    private Long sortTimeCalculate(Sortable sortable, Comparator<Integer> comparator, int num, boolean isPrint, boolean isCheck){
         Integer[] list = createList(num);
-        consumer.accept(list);
+
+        Long t1 = System.currentTimeMillis();
+        sortable.sort(list, comparator);
         Long t2 = System.currentTimeMillis();
 
         if(isPrint){
@@ -55,7 +60,15 @@ public class SortTester {
             System.out.println(str);
         }
 
-        System.out.println((t2 - t1) / 1000 + "." + (t2 - t1) % 1000 + "ms");
+        if(isCheck){
+            if(SortChecker.checkSort(list, comparator)){
+                System.out.println("pass");
+            }else{
+                System.out.println("fail");
+            }
+        }
+
+        System.out.println((t2 - t1) / 1000 + "." + (t2 - t1) % 1000 + "s");
 
         return t2 - t1;
     }
